@@ -50,7 +50,7 @@ test("complate support", async () => {
 <p>lorem ipsum
 dolor sit amet</p><figure>
 
-    <canvas  width="100"  height="100">blank canvas</canvas>
+    <canvas width="100" height="100">blank canvas</canvas>
 
 <figcaption>a blank canvas</figcaption>
 </figure><p>consectetur adipisicing elit,
