@@ -1,7 +1,7 @@
 import diskless from "./diskless";
 import { load } from "../util.js";
 
-let RODUNJ, ROLLUP, JSX; // NB: loaded lazily
+let COMPLATE, ROLLUP, JSX; // NB: loaded lazily
 
 let INPUT_CONFIG = {
 	treeshake: false // TODO: configurable?
@@ -29,7 +29,7 @@ export default class Bundle {
 		let bundle = await ROLLUP({
 			acornInjectPlugins: [JSX],
 			...INPUT_CONFIG,
-			plugins: [RODUNJ, this._diskless],
+			plugins: [COMPLATE, this._diskless],
 			input: entryPoint,
 			// TODO: support for `external`
 			cache: this._cache
@@ -56,13 +56,15 @@ export default class Bundle {
 		}
 
 		let pending = this._pending = Promise.all([
-			"rodunj",
+			"complate-ast",
 			"rollup",
 			"acorn-jsx"
 		].map(pkg => load(pkg, "complate extension")));
 
-		let [rodunj, rollup, jsx] = await pending;
-		RODUNJ = rodunj.default;
+		let [complate, rollup, jsx] = await pending;
+		COMPLATE = complate.rollupPlugin({
+			prefix: ""
+		});
 		ROLLUP = rollup.rollup;
 		JSX = jsx.default();
 

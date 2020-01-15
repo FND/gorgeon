@@ -7,7 +7,7 @@ suite("complate extension");
 
 test("rendering", async () => {
 	let bundle = new Bundle(fixturePath());
-	let html = await bundle.renderString(`
+	let jsx = `
 import Article from "./article.jsx";
 
 <>
@@ -17,7 +17,9 @@ import Article from "./article.jsx";
 		<p>lorem ipsum dolor sit amet</p>
 	</Article>
 </>
-	`, "snippet.jsx");
-	assertSame(html.replace(/\n|\t/g, ""), // eslint-disable-next-line max-len
-			"<h1>Hello World</h1><article><h2>Lipsum</h2><ol><li>foo</li><li>bar</li></ol><p>lorem ipsum dolor sit amet</p></article>");
+  `;
+	let html = await bundle.renderString(jsx, "snippet.jsx");
+	// eslint-disable-next-line max-len
+	let expected = "<h1>Hello World</h1><article><h2>Lipsum</h2><ol><li>foo</li><li>bar</li></ol><p>lorem ipsum dolor sit amet</p></article>";
+	assertSame(html, expected);
 });
