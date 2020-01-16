@@ -1,6 +1,6 @@
 {
 	"dependencies": {
-		"complate-ast": "https://github.com/larsrh/complate-ast/releases/download/v0.0.1/complate-ast-0.0.1.tgz",
+		"complate-ast": "https://github.com/larsrh/complate-ast/releases/download/v0.0.2/complate-ast-0.0.2.tgz",
 		"rollup": "^1.27.14"
 	}
 }

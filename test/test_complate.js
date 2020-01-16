@@ -21,18 +21,7 @@ import Article from "./article.jsx";
 </div>
   `;
 	let html = await bundle.renderString(jsx, "snippet.jsx");
-	let expected = `<div>
-	<h1>Hello World</h1>
-
-	
-		<article>
-		<h2>Lipsum</h2>
-		<ol><li>foo</li><li>bar</li></ol>
-		
-			<p>lorem ipsum dolor sit amet</p>
-		
-	</article>
-	
-</div>`;
+	// eslint-disable-next-line max-len
+	let expected = "<div><h1>Hello World</h1><article><h2>Lipsum</h2><ol><li>foo</li><li>bar</li></ol><p>lorem ipsum dolor sit amet</p></article></div>";
 	assertSame(html, expected);
 });

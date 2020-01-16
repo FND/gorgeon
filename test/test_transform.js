@@ -47,13 +47,8 @@ test("complate support", async () => {
 <title>Hello World</title>
 <body>
 <h1>Hello World</h1>
-<p>lorem ipsum
-dolor sit amet</p><figure>
-
-    <canvas width="100" height="100">blank canvas</canvas>
-
-<figcaption>a blank canvas</figcaption>
-</figure><p>consectetur adipisicing elit,
+<p>lorem ipsum` + /* eslint-disable-next-line max-len */ `
+dolor sit amet</p><figure><canvas width="100" height="100">blank canvas</canvas><figcaption>a blank canvas</figcaption></figure><p>consectetur adipisicing elit,
 sed do eiusmod tempor</p>
 </body>
 </html>
