@@ -1,6 +1,6 @@
 /* global suite, test */
 import ContentPage from "../src/page/index.js";
-import Bundle from "../src/complate/index.js";
+import { Bundle } from "../src/complate/index.js";
 import { fixturePath, wait } from "./util.js";
 import path from "path";
 import { strictEqual as assertSame } from "assert";

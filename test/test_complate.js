@@ -1,5 +1,5 @@
 /* global suite, test */
-import Bundle from "../src/complate/index.js";
+import { Bundle } from "../src/complate/index.js";
 import { fixturePath } from "./util.js";
 import { strictEqual as assertSame } from "assert";
 

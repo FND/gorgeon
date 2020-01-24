@@ -1,7 +1,7 @@
-import Bundle from "../src/complate/index.js";
+import makeTransform from "../src/complate/index.js";
 import renderMarkdown from "../src/markdown.js";
 
-let BUNDLE = new Bundle(__dirname);
+let renderComponent = makeTransform(__dirname);
 
 export default {
 	source: "./content",
@@ -13,10 +13,6 @@ export default {
 		complate: renderComponent
 	}
 };
-
-function renderComponent(jsx, params, context) {
-	return BUNDLE.renderString(jsx, "snippet.jsx", { context: params });
-}
 
 async function renderDocument(meta, html) {
 	// XXX: workarounds for Rodunj's lack of support for raw HTML and document types
