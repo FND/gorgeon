@@ -1,21 +1,30 @@
 #!/usr/bin/env node -r esm
 
-import config from "./config.js";
 import WebSite from "../src/site.js";
 import path from "path";
 
 let ROOT = __dirname;
 
-main();
+main(...process.argv.slice(2));
 
-async function main() {
-	// TODO: all paths should be relative to `config.js` (cf. faucet)
-	let sourceDir = path.resolve(ROOT, config.source);
-	let targetDir = path.resolve(ROOT, config.target);
+async function main(configFile) {
+	let { config, referenceDir } = readConfig(ROOT, configFile);
+	// TODO: enforce relative paths (cf. faucet-pipeline-core)
+	let sourceDir = path.resolve(referenceDir, config.source);
+	let targetDir = path.resolve(referenceDir, config.target);
 
 	let site = new WebSite(targetDir, config.layouts, config.transforms);
 	config.pages.forEach(filename => {
 		let filepath = path.resolve(sourceDir, filename);
 		site.createPage(filepath, { overwrite: true });
 	});
+}
+
+// adapted from faucet-pipeline-core
+function readConfig(rootDir, filepath = "config.js") {
+	let configPath = path.resolve(rootDir, filepath);
+	return {
+		referenceDir: path.dirname(configPath),
+		config: require(configPath).default
+	};
 }
