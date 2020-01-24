@@ -10,28 +10,21 @@ export default {
 	layouts: { default: renderDocument },
 	transforms: {
 		md: (md, params, context) => renderMarkdown(md, { fragIDs: true }),
-		complate: (jsx, params, context) => BUNDLE.
-			renderString(jsx, "snippet.jsx", { context: params })
+		complate: renderComponent
 	}
 };
 
-// NB: does not HTML-encode input parameters
-function renderDocument({ title, lang = "en" }, html) {
-	return `
-<!DOCTYPE html>
-<html lang="${lang}">
+function renderComponent(jsx, params, context) {
+	return BUNDLE.renderString(jsx, "snippet.jsx", { context: params });
+}
 
-<head>
-	<meta charset="utf-8">
-	<title>${title}</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
+async function renderDocument(meta, html) {
+	// XXX: workarounds for Rodunj's lack of support for raw HTML and document types
+	let placeholder = "%CONTENT%";
+	let _html = await renderComponent(`
+import { Document } from "./components.jsx";
 
-<body>
-	<h1>${title}</h1>
-	${html}
-</body>
-
-</html>
-	`.trim() + "\n";
+<Document {...context}>${placeholder}</Document>
+	`, meta);
+	return "<!DOCTYPE html>\n" + _html.replace(placeholder, html);
 }
