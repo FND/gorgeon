@@ -29,6 +29,7 @@
 		"commonmark": "^0.29.0",
 		"eslint-config-fnd": "^1.8.0",
 		"esm": "^3.2.25",
+		"faucet-pipeline-core": "git+https://github.com/faucet-pipeline/faucet-pipeline-core.git#plugin-api",
 		"gorgeon-complate": "./src/complate",
 		"mocha": "^7.0.0"
 	}
