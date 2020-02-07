@@ -1,6 +1,6 @@
 import _Bundle from "./bundling.js";
 import { load, abort } from "../util.js";
-import { safe } from "complate-ast/dist/lib";
+import { safe } from "complate-ast";
 import vm from "vm";
 
 let DOCTYPE = "<!DOCTYPE html>";
@@ -38,14 +38,12 @@ export function makeTransform(referenceDir) {
 
 export class Bundle extends _Bundle {
 	async renderString(code, filename, context) {
-		let JSXRuntime = await load("complate-ast/dist/runtime", "complate extension");
-
 		// TODO: generate unique file name to avoid potential race condition for
 		//       concurrent access with identical sources?
 		let id = await this.virtualModule(filename, code);
 		code = await this.generate(id);
 
-		let sandbox = { ...context, ...JSXRuntime };
+		let sandbox = { ...context };
 		let ast = vm.runInNewContext(code, sandbox);
 		return ast.pop ? ast.map(ast => ast.value).join("") : ast.value;
 	}

@@ -1,7 +1,7 @@
 {
 	"dependencies": {
 		"acorn-jsx": "^5.1.0",
-		"complate-ast": "https://github.com/larsrh/complate-ast/releases/download/v0.0.4/complate-ast-0.0.4.tgz",
+		"complate-ast": "https://github.com/larsrh/complate-ast/releases/download/v0.0.5/complate-ast-0.0.5.tgz",
 		"rollup": "^1.27.14"
 	}
 }

@@ -1,4 +1,4 @@
-import { safe } from "../node_modules/complate-ast/dist/lib.js";
+import { safe } from "../node_modules/complate-ast/dist/index";
 
 export function Exhibit({ caption }, ...children) {
 	return <figure>

@@ -5,17 +5,17 @@ import { strictEqual as assertSame } from "assert";
 
 suite("MTC");
 
-test.only("rendering", async () => {
+test("rendering", async () => {
 	let bundle = new Bundle(fixturePath());
 	let jsx = `
 import Article from "./article.jsx";
-import { safe } from "../../node_modules/complate-ast/dist/lib.js";
+import { safe } from "../../node_modules/complate-ast/dist/index.js";
 
 <>
 	<h1>Hello World</h1>
 
 	<Article title="Lipsum" tags={["foo", "bar"]}>
-		{"<p>lorem ipsum dolor sit amet</p>"}
+		{safe("<p>lorem ipsum dolor sit amet</p>")}
 	</Article>
 </>
   `;
