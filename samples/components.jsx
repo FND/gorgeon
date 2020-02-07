@@ -1,3 +1,5 @@
+import { safe } from "../node_modules/complate-ast/dist/lib.js";
+
 export function Exhibit({ caption }, ...children) {
 	return <figure>
 		{children}
@@ -15,7 +17,7 @@ export function Document({ title, lang = "en" }, html) {
 
 		<body>
 			<h1>{title}</h1>
-			{html}
+			{safe(html)}
 		</body>
 	</html>;
 }

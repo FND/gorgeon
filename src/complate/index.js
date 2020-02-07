@@ -1,6 +1,6 @@
 import _Bundle from "./bundling.js";
 import { load, abort } from "../util.js";
-import { safe } from "complate-ast";
+import { safe } from "complate-ast/dist/lib";
 import vm from "vm";
 
 let DOCTYPE = "<!DOCTYPE html>";
