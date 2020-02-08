@@ -1,4 +1,7 @@
-import { safe } from "../node_modules/complate-ast/dist/index";
+/*
+// FIXME: this import fails, but should work
+*/
+import { safe } from "complate-ast";
 
 export function Exhibit({ caption }, ...children) {
 	return <figure>

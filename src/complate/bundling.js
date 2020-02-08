@@ -56,14 +56,14 @@ export default class Bundle {
 		}
 
 		let pending = this._pending = Promise.all([
-			"complate-ast/dist/bundles/rollup",
+			"complate-ast/dist/bundles/rollup.js",
 			"rollup",
 			"acorn-jsx"
 		].map(pkg => load(pkg, "complate extension")));
 
 		let [complate, rollup, jsx] = await pending;
 		COMPLATE = complate.default({
-      importPath: `${__dirname}/../../node_modules/complate-ast/dist/runtime.js`
+			importPath: require.resolve("complate-ast/dist/runtime.js")
 		});
 		ROLLUP = rollup.rollup;
 		JSX = jsx.default();
