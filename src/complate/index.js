@@ -2,7 +2,6 @@ import _Bundle from "./bundling.js";
 import { abort } from "../util.js";
 import vm from "vm";
 
-let DOCTYPE = "<!DOCTYPE html>";
 let LAYOUT = (component, filepath) => `
 import { ${component} } from "${filepath}";
 
@@ -11,7 +10,6 @@ import { ${component} } from "${filepath}";
 
 // generates a layout function for the given `component` name, to be imported
 // from `filepath`, relative to `referenceDir`
-// XXX: workaround for complate-ast's lack of support for document types
 export function makeRenderer(component, filepath, referenceDir) {
 	if(/[^a-zA-Z0-9]/.test(component)) { // primitive heuristic
 		abort("ERROR: layout component names must be alphanumeric; " +
@@ -25,7 +23,7 @@ export function makeRenderer(component, filepath, referenceDir) {
 
 	return async function renderDocument(meta, html) {
 		html = await renderComponent(jsx, { ...meta, _html: html });
-		return `${DOCTYPE}\n${html}`;
+		return html;
 	};
 }
 
