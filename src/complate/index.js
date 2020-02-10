@@ -1,6 +1,5 @@
 import _Bundle from "./bundling.js";
 import { abort } from "../util.js";
-import { safe } from "complate-ast";
 import vm from "vm";
 
 let DOCTYPE = "<!DOCTYPE html>";
@@ -25,7 +24,7 @@ export function makeRenderer(component, filepath, referenceDir) {
 	let jsx = LAYOUT(component, filepath);
 
 	return async function renderDocument(meta, html) {
-		html = await renderComponent(jsx, { ...meta, _html: safe(html) });
+		html = await renderComponent(jsx, { ...meta, _html: html });
 		return `${DOCTYPE}\n${html}`;
 	};
 }
