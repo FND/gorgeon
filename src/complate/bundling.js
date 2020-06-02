@@ -1,7 +1,7 @@
 import { Bundle, Config } from "beatdown";
 import diskless from "beatdown/lib/diskless";
 import { Plugin } from "beatdown/lib/config/plugin";
-import rodunj from "rodunj";
+import { complate } from "complate-ast";
 import acornJSX from "acorn-jsx";
 
 export default class VirtualBundle extends Bundle {
@@ -14,7 +14,7 @@ export default class VirtualBundle extends Bundle {
 			parser: acornJSX()
 		});
 		config.addPlugin(new Plugin("diskless", dl));
-		config.addPlugin(new Plugin("complate-rodunj", rodunj));
+		config.addPlugin(new Plugin("complate-ast", complate, { prefix: "__gorgeon_" }));
 		super(config);
 
 		this._diskless = dl;

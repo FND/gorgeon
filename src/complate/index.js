@@ -19,7 +19,11 @@ export async function makeBundle(referenceDir) {
 }
 
 async function renderString(code, filename, context = {}) {
-	let { renderToString } = await load("rodunj/src/render", "complate extension");
+	let complate = await load("complate-ast", "complate extension");
+	let prefixed = {};
+	complate.runtimeSymbols.forEach(key => {
+		prefixed[`__gorgeon_${key}`] = complate[key];
+	});
 
 	// TODO: generate unique file name to avoid potential race condition for
 	//       concurrent access with identical sources?
@@ -27,7 +31,7 @@ async function renderString(code, filename, context = {}) {
 	this.config.input.input = id; // FIXME: breaks encapsulation
 	code = await this.compile();
 
-	let sandbox = { ...context, console };
-	let segments = vm.runInNewContext(code, sandbox);
-	return renderToString(...segments);
+	let sandbox = { ...context, console, ...prefixed };
+	let ast = vm.runInNewContext(code, sandbox);
+	return complate.renderToString("raw", ast);
 }
